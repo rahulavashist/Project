@@ -1,0 +1,11 @@
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; 
+  }
+  .img{
+    margin:10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px 1px rgba(178, 180, 178, .3)
+  }

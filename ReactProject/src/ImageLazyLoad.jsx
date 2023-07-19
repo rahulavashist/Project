@@ -68,19 +68,21 @@ const App = () => {
         containerRef.current && //This checks if the containerRef has been attached to a DOM element and also measure the scrolling position
         window.innerHeight + window.pageYOffset >= // it checks the current vertical scroll position of the window by adding the viewport height and also check 
 the number of pixels the page has been scrolled vertically 
- containerRef.current.offsetHeight - 100 &&
-        !loading
+ containerRef.current.offsetHeight - 100 && //This condition checks if the user has scrolled close to the bottom of the container. It compares the sum of the viewport height and vertical scroll position to the container's height
+        !loading  //This checks if the loading state is false or no data fetched
       ) {
-        fetchData();
+        fetchData(); // If the conditions within the if statement are valid then fetchData function called and this is a way to fetch new page images
       }
     };
 
-    fetchData();
-    window.addEventListener('scroll', handleScroll);
+    fetchData(); // This line immediately calls the fetchData function when the component is mounted. The purpose is to load the initial set of images from the API when the component is first rendered.
+
+    window.addEventListener('scroll', handleScroll);// This line adds an event listener to the scroll event of the window. It attaches the handleScroll function to the scroll event, which means that handleScroll will be called whenever the user scrolls on the page.
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);// This return statement defines a cleanup function that will be executed when the component is unmounted 
     };
-  }, [loading, page]);
+  }, [loading, page]); // The second argument of the useEffect hook is an array of dependencies and it takes all the effect of state variables and props and The effect will be re-run whenever any dependencies change
 
   const getNumColumns = () => {
     if (window.innerWidth >= 1024) {

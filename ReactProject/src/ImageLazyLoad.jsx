@@ -7,16 +7,19 @@ import axios from 'axios';
 import { css } from '@emotion/react';
 import { RingLoader } from 'react-spinners';
 
-const ImageLazyLoad = ({ src, alt }) => {
-  const [imageSrc, setImageSrc] = useState(null);
-  const imageRef = useRef();
+const ImageLazyLoad = ({ src, alt }) => { // functional component named ImageLazyLoad. The component takes two props src and alt (src is url of image and alt text of image)
+
+  const [imageSrc, setImageSrc] = useState(null); // useState hook to define a state variable imageSrc and updater function, initial state of imageSrc is set to null
+
+  const imageRef = useRef(); // The ref will be attached to the img element representing the lazy-loaded image
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const observer = new IntersectionObserver(  // This line creates a new IntersectionObserver object. An intersection observer is used to monitor the visibility of an element within the viewpage
+
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting) { // the observed element is intersecting with the viewport. If the image becomes visible within the viewport, the setImageSrc function is called
           setImageSrc(src);
-          observer.unobserve(imageRef.current);
+          observer.unobserve(imageRef.current); // After the image becomes visible the observer stops 
         }
       },
       {
@@ -25,7 +28,7 @@ const ImageLazyLoad = ({ src, alt }) => {
     );
 
     if (imageRef.current) {
-      observer.observe(imageRef.current);
+      observer.observe(imageRef.current);// checks if the imageRef.current exists and is not null. 
     }
 
     return () => {
@@ -33,7 +36,7 @@ const ImageLazyLoad = ({ src, alt }) => {
         observer.unobserve(imageRef.current);
       }
     };
-  }, [src]);
+  }, [src]);// The useEffect hook dependency array
 
   return <img ref={imageRef} src={imageSrc} alt={alt} height="400px" width="300px"  className='img'/>;
 };
@@ -103,8 +106,8 @@ the number of pixels the page has been scrolled vertically
   `;
 
   return (
-    <div ref={containerRef}>
-      <div className="gallery-container" style={{ columnCount: numColumns }}>
+    <div ref={containerRef}> // containerRef attached to it.and  The reference will be used to track this container element
+      <div className="gallery-container" style={{ columnCount: numColumns }}> // columnCount to numColumns, which dynamically controls the number of columns based on the window width
         {data.map((item, index) => (
           <div key={index} className="gallery-item" style={{ width: columnWidth }}>
             <ImageLazyLoad src={item.image_path}  />

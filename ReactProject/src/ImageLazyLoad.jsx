@@ -69,8 +69,7 @@ const App = () => {
     const handleScroll = () => {// This line defines the handleScroll function, which will be called whenever the user scrolls on the page
       if (
         containerRef.current && //This checks if the containerRef has been attached to a DOM element and also measure the scrolling position
-        window.innerHeight + window.pageYOffset >= // it checks the current vertical scroll position of the window by adding the viewport height and also check 
-the number of pixels the page has been scrolled vertically 
+        window.innerHeight + window.pageYOffset >= // it checks the current vertical scroll position of the window by adding the viewport height and also check the number of pixels the page has been scrolled vertically 
  containerRef.current.offsetHeight - 100 && //This condition checks if the user has scrolled close to the bottom of the container. It compares the sum of the viewport height and vertical scroll position to the container's height
         !loading  //This checks if the loading state is false or no data fetched
       ) {

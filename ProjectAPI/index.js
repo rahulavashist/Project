@@ -1,8 +1,5 @@
 const express = require("express")
 
-const axios = require('axios');
-const Image =require('./models/ImageModel')
-
 require("./dbConnect")
 const ImageRoutes = require("./routes/ImageRoutes")
 const app = express()
